@@ -89,6 +89,7 @@ public class TileEntityInfusionMatrixAlpha extends TileInfusionMatrix implements
     public void readCustomNBT(NBTTagCompound nbtCompound) {
         this.active = nbtCompound.getBoolean("active");
         this.crafting = nbtCompound.getBoolean("crafting");
+        setPedestal(this.crafting);
         this.instability = nbtCompound.getShort("instability");
         this.recipeEssentia.readFromNBT(nbtCompound);
     }
@@ -546,6 +547,7 @@ public class TileEntityInfusionMatrixAlpha extends TileInfusionMatrix implements
                         this.recipePlayer = player.getCommandSenderName();
                         this.instability = this.symmetry + this.recipeInstability;
                         this.crafting = true;
+                        setPedestal(true);
                         this.worldObj.playSoundEffect(
                                 (double) this.xCoord,
                                 (double) this.yCoord,
@@ -579,6 +581,7 @@ public class TileEntityInfusionMatrixAlpha extends TileInfusionMatrix implements
                             this.recipeXP = recipe2.calcXP(this.recipeInput);
                             this.instability = this.symmetry + this.recipeInstability;
                             this.crafting = true;
+                            setPedestal(true);
                             this.worldObj.playSoundEffect(
                                     (double) this.xCoord,
                                     (double) this.yCoord,
@@ -900,6 +903,7 @@ public class TileEntityInfusionMatrixAlpha extends TileInfusionMatrix implements
     public void removeCenter() {
         this.instability = 0;
         this.crafting = false;
+        setPedestal(false);
         this.recipeEssentia = new AspectList();
         this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
         this.worldObj.playSoundEffect(
@@ -915,6 +919,7 @@ public class TileEntityInfusionMatrixAlpha extends TileInfusionMatrix implements
     public void sendToEnd() {
         this.instability = 0;
         this.crafting = false;
+        setPedestal(false);
         this.craftingFinish(this.recipeOutput, this.recipeOutputLabel);
         this.recipeOutput = null;
         this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
@@ -1242,6 +1247,13 @@ public class TileEntityInfusionMatrixAlpha extends TileInfusionMatrix implements
             this.loc = loc;
             this.ticks = ticks;
             this.color = color;
+        }
+    }
+
+    private void setPedestal(boolean crafting) {
+        TileEntity pedestal = this.worldObj.getTileEntity(this.xCoord, this.yCoord - 2, this.zCoord);
+        if (pedestal instanceof TileEntityPedestalAlpha) {
+            ((TileEntityPedestalAlpha) pedestal).setElevated(crafting);
         }
     }
 }

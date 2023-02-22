@@ -19,6 +19,7 @@ public class TileEntityPedestalAlpha extends TilePedestal {
     private static final int[] slots = new int[] { 0 };
     private ItemStack[] inventory = new ItemStack[1];
     private String customName;
+    public boolean elevated = false;
     public static final String tileEntityName = VersionInfo.ModID + ".marblePedestal";
 
     @SideOnly(Side.CLIENT)
@@ -185,6 +186,11 @@ public class TileEntityPedestalAlpha extends TilePedestal {
 
     public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3) {
         return true;
+    }
+
+    public void setElevated(boolean elevated) {
+        System.out.println("elevated " + elevated);
+        this.elevated = elevated;
     }
 
     public boolean receiveClientEvent(int i, int j) {

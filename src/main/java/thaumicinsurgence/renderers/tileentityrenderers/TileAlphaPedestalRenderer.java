@@ -25,7 +25,10 @@ public class TileAlphaPedestalRenderer extends TilePedestalRenderer {
             float ticks = (float) Minecraft.getMinecraft().renderViewEntity.ticksExisted + par8;
             GL11.glPushMatrix();
             float h = MathHelper.sin(ticks % 32767.0F / 16.0F) * 0.05F;
-            GL11.glTranslatef((float) par2 + 0.5F, (float) par4 + 1.15F + h, (float) par6 + 0.5F);
+            GL11.glTranslatef(
+                    (float) par2 + 0.5F,
+                    (float) par4 + 1.15F + (ped.elevated ? 1.15F : h),
+                    (float) par6 + 0.5F);
             GL11.glRotatef(ticks % 360.0F, 0.0F, 1.0F, 0.0F);
             if (ped.getStackInSlot(0).getItem() instanceof ItemBlock) {
                 GL11.glScalef(2.0F, 2.0F, 2.0F);
@@ -48,6 +51,7 @@ public class TileAlphaPedestalRenderer extends TilePedestalRenderer {
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8) {
         this.renderTileEntityAt((TileEntityPedestalAlpha) par1TileEntity, par2, par4, par6, par8);
     }

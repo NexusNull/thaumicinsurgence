@@ -15,6 +15,7 @@ import thaumcraft.common.tiles.*;
 import thaumicinsurgence.main.Config;
 import thaumicinsurgence.main.utils.TabThaumicInsurgence;
 import thaumicinsurgence.main.utils.VersionInfo;
+import thaumicinsurgence.tileentity.TileEntityPedestalAlpha;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -70,7 +71,7 @@ public class BlockPedestalAlpha extends BlockStoneDevice {
 
     // TODO: NEEDS TO CHANGE
     public TileEntity createTileEntity(World world, int metadata) {
-        return new TilePedestal();
+        return new TileEntityPedestalAlpha();
     }
 
     public void setBlockBoundsBasedOnState(IBlockAccess world, int i, int j, int k) {

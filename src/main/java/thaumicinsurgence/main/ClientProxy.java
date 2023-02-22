@@ -60,9 +60,8 @@ public class ClientProxy extends CommonProxy {
         Config.blockStoneDeviceTwoRI = RenderingRegistry.getNextAvailableRenderId();
         this.registerBlockRenderer(new BlockPillarAlphaRenderer());
 
-        // TODO: FIX THIS
-        Config.blockStoneDeviceThreeRI = RenderingRegistry.getNextAvailableRenderId();
         this.registerTileEntitySpecialRenderer(TileEntityPedestalAlpha.class, new TileAlphaPedestalRenderer());
+        Config.blockStoneDeviceThreeRI = RenderingRegistry.getNextAvailableRenderId();
         this.registerBlockRenderer(new BlockAlphaPedestalRenderer());
     }
 }

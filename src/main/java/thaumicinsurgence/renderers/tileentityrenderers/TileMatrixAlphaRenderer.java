@@ -100,57 +100,35 @@ public class TileMatrixAlphaRenderer extends TileRunicMatrixRenderer {
         GL11.glTranslatef((float) par2 + 0.5F, (float) par4 + 0.5F, (float) par6 + 0.5F);
         float ticks = (float) Minecraft.getMinecraft().renderViewEntity.ticksExisted + par8;
         if (is.getWorldObj() != null) {
-            GL11.glRotatef(ticks % 360.0F * is.startUp, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(35.0F * is.startUp, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(45.0F * is.startUp, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(ticks % 360.0F, 0.0F, 1.0F, 0.0F);
         }
 
         // this is a reference to instability, was originally 50.0 and 50.0F respectively
         float instability = Math
                 .min(6.0F, 1.0F + (float) is.instability * 0.66F * ((float) Math.min(is.craftCount, 100) / 100.0F));
-        float b1 = 0.0F;
-        float b2 = 0.0F;
-        float b3 = 0.0F;
-        int aa;
-        int bb;
-        int cc;
+        float o = is.startUp;
+        float i = 0F;
 
         for (int a = 0; a < 2; ++a) {
             for (int b = 0; b < 2; ++b) {
+                if (a == 0 && b == 0) i = 0;
+                if (a == 0 && b == 1) i = 2;
+                if (a == 1 && b == 1) i = 4;
+                if (a == 1 && b == 0) i = 6;
                 for (int c = 0; c < 2; ++c) {
-                    if (is.active) {
-                        // this is a reference to instability
-                        b1 = MathHelper.sin((ticks + (float) (a * 10)) / (15.0F - instability / 2.0F)) * 0.01F
-                                * is.startUp
-                                * instability;
-                        // this is a reference to instability
-                        b2 = MathHelper.sin((ticks + (float) (b * 10)) / (14.0F - instability / 2.0F)) * 0.01F
-                                * is.startUp
-                                * instability;
-                        // this is a reference to instability
-                        b3 = MathHelper.sin((ticks + (float) (c * 10)) / (13.0F - instability / 2.0F)) * 0.01F
-                                * is.startUp
-                                * instability;
-                    }
+                    ++i;
 
-                    aa = a == 0 ? -1 : 1;
-                    bb = b == 0 ? -1 : 1;
-                    cc = c == 0 ? -1 : 1;
                     GL11.glPushMatrix();
-                    GL11.glTranslatef(b1 + (float) aa * 0.25F, b2 + (float) bb * 0.25F, b3 + (float) cc * 0.25F);
-                    if (a > 0) {
-                        GL11.glRotatef(90.0F, (float) a, 0.0F, 0.0F);
-                    }
-
-                    if (b > 0) {
-                        GL11.glRotatef(90.0F, 0.0F, (float) b, 0.0F);
-                    }
-
-                    if (c > 0) {
-                        GL11.glRotatef(90.0F, 0.0F, 0.0F, (float) c);
-                    }
-
+                    GL11.glTranslatef(
+                            (0.25F - 0.5F * b) * (1 - o) + o * (float) Math.cos(Math.PI * 0.25F * i),
+                            (0.25F - 0.5F * c) * (1 - o),
+                            (0.25F - 0.5F * a) * (1 - o) + o * (float) Math.sin(Math.PI * 0.25F * i));
+                    GL11.glRotatef(90.0F * o, 0.5F, 0.0F, 0.5F);
+                    GL11.glRotatef(ticks % 360.0F * o, 0.5F, 0.0F, 0.5F);
                     GL11.glScaled(0.45D, 0.45D, 0.45D);
+
+                    GL11.glRotatef(90.0F * o, (a > 0 ? 1F : -1F), (b > 0 ? 1F : -1F), (c > 0 ? 1F : -1F));
+
                     this.model.render();
                     GL11.glPopMatrix();
                 }
@@ -165,37 +143,24 @@ public class TileMatrixAlphaRenderer extends TileRunicMatrixRenderer {
 
             for (int a = 0; a < 2; ++a) {
                 for (int b = 0; b < 2; ++b) {
+                    if (a == 0 && b == 0) i = 0;
+                    if (a == 0 && b == 1) i = 2;
+                    if (a == 1 && b == 1) i = 4;
+                    if (a == 1 && b == 0) i = 6;
                     for (int c = 0; c < 2; ++c) {
                         // this is a reference to instability
-                        b1 = MathHelper.sin((ticks + (float) (a * 10)) / (15.0F - instability / 2.0F)) * 0.01F
-                                * is.startUp
-                                * instability;
-                        // this is a reference to instability
-                        b2 = MathHelper.sin((ticks + (float) (b * 10)) / (14.0F - instability / 2.0F)) * 0.01F
-                                * is.startUp
-                                * instability;
-                        // this is a reference to instability
-                        b3 = MathHelper.sin((ticks + (float) (c * 10)) / (13.0F - instability / 2.0F)) * 0.01F
-                                * is.startUp
-                                * instability;
-                        aa = a == 0 ? -1 : 1;
-                        bb = b == 0 ? -1 : 1;
-                        cc = c == 0 ? -1 : 1;
+                        i++;
+
                         GL11.glPushMatrix();
-                        GL11.glTranslatef(b1 + (float) aa * 0.25F, b2 + (float) bb * 0.25F, b3 + (float) cc * 0.25F);
-                        if (a > 0) {
-                            GL11.glRotatef(90.0F, (float) a, 0.0F, 0.0F);
-                        }
+                        GL11.glTranslatef(
+                                (0.25F - 0.5F * b) * (1 - o) + o * (float) Math.cos(Math.PI * 0.25F * i),
+                                (0.25F - 0.5F * c) * (1 - o),
+                                (0.25F - 0.5F * a) * (1 - o) + o * (float) Math.sin(Math.PI * 0.25F * i));
+                        GL11.glRotatef(90.0F * o, 0.5F, 0.0F, 0.5F);
+                        GL11.glRotatef(ticks % 360.0F * o, 0.5F, 0.0F, 0.5F);
+                        GL11.glRotatef(90.0F * o, (a > 0 ? 1F : -1F), (b > 0 ? 1F : -1F), (c > 0 ? 1F : -1F));
 
-                        if (b > 0) {
-                            GL11.glRotatef(90.0F, 0.0F, (float) b, 0.0F);
-                        }
-
-                        if (c > 0) {
-                            GL11.glRotatef(90.0F, 0.0F, 0.0F, (float) c);
-                        }
-
-                        GL11.glScaled(0.45D, 0.45D, 0.45D);
+                        GL11.glScaled(0.46D, 0.46D, 0.46D);
                         int j = 15728880;
                         int k = j % 65536;
                         int l = j / 65536;
