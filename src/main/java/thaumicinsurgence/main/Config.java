@@ -36,6 +36,7 @@ public class Config {
     public static int blockStoneDeviceRI;
     public static int blockStoneDeviceTwoRI;
     public static int blockStoneDeviceThreeRI;
+    public static int blockStoneDeviceFourRI;
 
     public static ItemMiscResources miscResources;
 
@@ -53,6 +54,7 @@ public class Config {
     public static BlockArcaneMarble arcaneMarble;
     public static BlockArcaneMarbleBrick arcaneMarbleBrick;
     public static BlockPedestalAlpha marblePedestal;
+    public static BlockTestRender blockTestRender;
 
     // ----- Config State info ----------------------------------
     public static Configuration configuration;
@@ -88,6 +90,8 @@ public class Config {
         GameRegistry.registerBlock(arcaneMarble, arcaneMarble.getUnlocalizedName());
         arcaneMarbleBrick = new BlockArcaneMarbleBrick();
         GameRegistry.registerBlock(arcaneMarbleBrick, arcaneMarbleBrick.getUnlocalizedName());
+        blockTestRender = new BlockTestRender();
+        GameRegistry.registerBlock(blockTestRender, blockTestRender.getUnlocalizedName());
 
         setupInfusionFucker();
     }
@@ -147,11 +151,16 @@ public class Config {
         marblePedestal = new BlockPedestalAlpha();
         GameRegistry.registerBlock(marblePedestal, "marblePedestal");
         GameRegistry.registerTileEntity(TileEntityPedestalAlpha.class, TileEntityPedestalAlpha.tileEntityName);
+
+        blockTestRender = new BlockTestRender();
+        GameRegistry.registerBlock(blockTestRender, "testRender");
+        GameRegistry.registerTileEntity(TileEntityTestRender.class, TileEntityTestRender.tileEntityName);
     }
 
     static {
         blockStoneDeviceRI = -1;
         blockStoneDeviceTwoRI = -2;
         blockStoneDeviceThreeRI = -3;
+        blockStoneDeviceFourRI = -4;
     }
 }
