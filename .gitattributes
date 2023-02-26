@@ -41,4 +41,5 @@
 *.[cC][mM][dD]          text eol=crlf
 *.[pP][sS]1             text eol=crlf
 
+*.[bB][lL][eE][nN][dD]  binary
 *[aA][uU][tT][oO][gG][eE][nN][eE][rR][aA][tT][eE][dD]* binary
